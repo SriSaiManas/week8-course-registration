@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html><head><title>Online Course Registration</title></head><body>
+<h1>Online Student Course Registration System</h1>
+{% with messages = get_flashed_messages() %}
+{% if messages %}<ul>{% for m in messages %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+{% endwith %}
+<h2>Course Registration Form</h2>
+<form method="POST">
+<label>Student Name:</label><input name="student_name" required><br><br>
+<label>Roll Number:</label><input name="roll_no" required><br><br>
+<label>Email:</label><input type="email" name="email" required><br><br>
+<label>Course:</label>
+<select name="course" required>
+<option value="">-- Select course --</option>
+{% for c in courses %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+</select><br><br>
+<button type="submit">Register Course</button>
+</form>
+<h2>Registration Records</h2>
+<table border="1" cellpadding="8">
+<tr><th>ID</th><th>Student</th><th>Roll Number</th><th>Email</th><th>Course</th></tr>
+{% for r in registrations %}
+<tr><td>{{ r.id }}</td><td>{{ r.student_name }}</td><td>{{ r.roll_no }}</td>
+<td>{{ r.email }}</td><td>{{ r.course }}</td></tr>
+{% else %}<tr><td colspan="5">No registrations available.</td></tr>{% endfor %}
+</table>
+</body></html>
